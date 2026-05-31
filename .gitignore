@@ -69,3 +69,5 @@ Thumbs.db
 # Vercel & Deployments
 .vercel
 
+# Antigravity CLI (internal)
+skills-lock.json
