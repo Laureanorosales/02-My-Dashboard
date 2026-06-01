@@ -1,5 +1,12 @@
 import { PokemonGrid, PokemonsResponse, SimplePokemon } from '@/app/pokemons';
 import Image from 'next/image';
+import { Metadata } from 'next';
+import { cacheLife, cacheTag, revalidateTag } from 'next/cache';
+
+export const metadata: Metadata = {
+	title: 'Pokédex',
+	description: 'Listado de pokemons',
+};
 
 const getPokemons = async (limit = 20, offset = 0): Promise<SimplePokemon[]> => {
 	const data: PokemonsResponse = await fetch(
@@ -17,12 +24,24 @@ const getPokemons = async (limit = 20, offset = 0): Promise<SimplePokemon[]> => 
 };
 
 export default async function PokemonsPage() {
+	'use cache';
+
+	cacheTag('pokemons');
+
+	// cacheLife({
+	// 	stale: 10,
+	// 	revalidate: 60,
+	// });
+
+	// revalidateTag('pokemons');
+
 	const pokemons = await getPokemons(151);
 
 	return (
 		<div className='flex flex-col'>
-			<span className='text-4xl my-2'>
-				Listado de pokemons <small>estatico</small>
+			<span className='font-bebas text-5xl tracking-wide text-[#ffd740] my-2'>
+				Listado de pokemons{' '}
+				<small className='font-space text-sm text-white/30 tracking-[0.12em] uppercase'>estático</small>
 			</span>
 			<PokemonGrid pokemons={pokemons} />
 		</div>

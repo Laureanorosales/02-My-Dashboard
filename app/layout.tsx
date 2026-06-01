@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Bebas_Neue,
+  Space_Mono,
+  Syne,
+  DM_Sans,
+} from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -10,6 +17,30 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const spaceMono = Space_Mono({
+  variable: "--font-space",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["700", "800"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${spaceMono.variable} ${syne.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
